@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { breakPoints } from '../../styles'
 
 export const ListaLoja = styled.ul`

@@ -1,20 +1,14 @@
 import { useParams } from 'react-router-dom'
 
+import { Container } from '../../styles'
 import { useGetPerfilQuery } from '../../services/api'
 
-import { Container } from '../../styles'
 import Footer from '../../components/Footer'
 import HeaderPerfil from '../../components/HeaderPerfil'
 import ListaDeComidas from '../../components/ListaDeComidas'
 import Cart from '../../components/Cart'
-export type PratoDetalhado = {
-  id: number
-  preco: number
-  foto: string
-  nome: string
-  descricao: string
-  porcao: string
-}
+import Checkout from '../../components/Checkout'
+import Loader from '../../components/Loader'
 
 const PerfilLoja = () => {
   const { id } = useParams<{ id: string }>()
@@ -22,7 +16,7 @@ const PerfilLoja = () => {
   const { data: restaurante, isLoading } = useGetPerfilQuery(id || '')
 
   if (isLoading) {
-    return <div>Carregando...</div>
+    return <Loader />
   }
 
   if (!restaurante) {
@@ -38,6 +32,7 @@ const PerfilLoja = () => {
         <ListaDeComidas Pratos={prato} />
       </Container>
       <Cart />
+      <Checkout />
       <Footer />
     </>
   )
